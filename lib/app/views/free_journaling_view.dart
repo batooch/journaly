@@ -5,14 +5,14 @@ import '../constants/app_texts.dart';
 import '../widgets/journal_editor.dart';
 import '../widgets/journal_toolbar.dart';
 
-class FreeJournaling extends StatefulWidget {
-  const FreeJournaling({super.key});
+class FreeJournalingView extends StatefulWidget {
+  const FreeJournalingView({super.key});
 
   @override
-  State<FreeJournaling> createState() => _FreeJournalingState();
+  State<FreeJournalingView> createState() => _FreeJournalingState();
 }
 
-class _FreeJournalingState extends State<FreeJournaling> {
+class _FreeJournalingState extends State<FreeJournalingView> {
   late final FleatherController _controller; // verwaltet den Text
   final FocusNode _focusNode = FocusNode(); // steuert Cursor-Fokus
 
