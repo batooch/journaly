@@ -18,6 +18,7 @@ class AuthService implements IAuthService {
       email: email,
       password: password,
     );
+
     final user = result.user;
     if (user == null) {
       throw FirebaseAuthException(
@@ -54,7 +55,6 @@ class AuthService implements IAuthService {
           message: 'Login returned null.',
         );
       }
-
       return user.uid;
     } on FirebaseAuthException catch (e) {
       switch (e.code) {
@@ -68,12 +68,10 @@ class AuthService implements IAuthService {
           throw Exception('Falsche E-Mail/Passwort-Kombination');
         case 'too-many-requests':
           throw Exception(
-            'Zu viele Versuche. Bitte warte kurz und versuche es erneut.',
-          );
+              'Zu viele Versuche. Bitte warte kurz und versuche es erneut.');
         default:
           throw Exception(
-            'Login fehlgeschlagen: Bitte überprüfe deine Eingaben.',
-          );
+              'Login fehlgeschlagen: Bitte überprüfe deine Eingaben.');
       }
     } catch (e) {
       throw Exception('Unbekannter Fehler beim Login: ${e.toString()}');
@@ -91,4 +89,12 @@ class AuthService implements IAuthService {
     if (!doc.exists) throw Exception('Benutzer nicht gefunden');
     return doc.data()!;
   }
+
+  /// Getter für aktuellen User
+  @override
+  User? get currentUser => _auth.currentUser;
+
+  /// Getter für aktuelle UID
+  @override
+  String? get currentUid => _auth.currentUser?.uid;
 }
